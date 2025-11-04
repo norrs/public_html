@@ -1,4 +1,4 @@
-baseURL = "https://example.com/"
+baseURL = "https://s.norrs.no/"
 languageCode = "en-us"
 title = "norrs - snippets of text"
 enableGitInfo = true
@@ -14,7 +14,7 @@ enableGitInfo = true
     endLevel = 3
 [params]
   description = "Attracted to computers since two."
-  repoURL = "https://github.com/norrs/public_html"
+  repoURL = "https://github.com/norrs/norrs.github.io"
 [caches]
   [caches.images]
     dir = ':cacheDir/images'
