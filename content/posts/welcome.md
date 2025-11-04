@@ -18,4 +18,4 @@ Push changes to the default branch and the GitHub Actions workflow will publish 
 
 ## Editing files
 
-Adding content while the webserver is up and saving the file, regenerates the file..
+Adding content while the webserver is up and saving the file, regenerates the file.. :-)
