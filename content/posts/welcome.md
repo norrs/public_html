@@ -15,3 +15,7 @@ This starter post demonstrates how Markdown becomes clean HTML. The header above
 ## Deploying
 
 Push changes to the default branch and the GitHub Actions workflow will publish the generated HTML to the `gh-pages` branch, making it easy to serve the site via GitHub Pages.
+
+## Editing files
+
+Adding content while the webserver is up and saving the file, regenerates the file.
