@@ -25,6 +25,9 @@ body {
   padding: 0;
   background: var(--bg-base);
   color: var(--text-body);
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 a {
@@ -56,6 +59,15 @@ a:focus {
   font-size: 1rem;
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
+  margin-top: auto;
+}
+
+.footer-meta {
+  margin: 0.75rem 0 0;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.95rem;
 }
 
 .site-title {
@@ -97,6 +109,7 @@ nav a:focus {
   max-width: clamp(62ch, 70vw, 72ch);
   margin: 0 auto;
   padding: 3rem 1.75rem 5rem;
+  flex: 1 0 auto;
 }
 
 p,

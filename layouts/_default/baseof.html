@@ -21,6 +21,9 @@
   </main>
   <footer class="site-footer">
     <p>Powered by <a href="https://gohugo.io/" rel="noopener">Hugo</a> &middot; <a href="https://github.com/">GitHub</a> Pages ready.</p>
+    {{ with .Site.Lastmod }}
+    <p class="footer-meta">Last updated <time datetime="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ .Format "January 2, 2006" }}</time>.</p>
+    {{ end }}
   </footer>
 </body>
 </html>
