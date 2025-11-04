@@ -8,7 +8,11 @@
       {{ if $entries }}
         {{ $repo := "" }}
         {{ with $page.Site.Params.repoURL }}
-          {{ $repo = strings.TrimSuffix . "/" }}
+          {{ $repo = replaceRE "/+$" "" . }}
+        {{ else }}
+          {{ with index $page.Site.Params "repourl" }}
+            {{ $repo = replaceRE "/+$" "" . }}
+          {{ end }}
         {{ end }}
         {{ $changeTotal := len $entries }}
         {{ $changeLabel := cond (eq $changeTotal 1) "change" "changes" }}
