@@ -15,3 +15,6 @@ enableGitInfo = true
 [params]
   description = "Attracted to computers since two."
   repoURL = "https://github.com/norrs/public_html"
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
