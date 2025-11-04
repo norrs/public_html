@@ -6,16 +6,34 @@
     {{ if $section }}
       {{ $entries := index $section $page.File.TranslationBaseName }}
       {{ if $entries }}
+        {{ $repo := "" }}
+        {{ with $page.Site.Params.repoURL }}
+          {{ $repo = strings.TrimSuffix . "/" }}
+        {{ end }}
+        {{ $changeTotal := len $entries }}
+        {{ $changeLabel := cond (eq $changeTotal 1) "change" "changes" }}
         <section class="post-history">
           <h2>Revision history</h2>
-          <ol>
-            {{ range $entries }}
-              <li>
-                <p><time datetime="{{ .date }}">{{ (time .date).Format "Jan 2, 2006 15:04" }}</time> &mdash; {{ .subject }} <span class="commit-hash">({{ .short }})</span></p>
-                <p class="meta">{{ .author }}</p>
-              </li>
-            {{ end }}
-          </ol>
+          <details>
+            <summary>This entry has {{ $changeTotal }} {{ $changeLabel }}. Click to see dates and commit messages.</summary>
+            <ol>
+              {{ range $entries }}
+                <li>
+                  <p>
+                    <time datetime="{{ .date }}">{{ (time .date).Format "Jan 2, 2006 15:04" }}</time>
+                    &mdash; {{ .subject }}
+                    {{ $commitURL := "" }}
+                    {{ if $repo }}
+                      {{ $commitURL = printf "%s/commit/%s" $repo .hash }}
+                    {{ end }}
+                    <span class="commit-hash">
+                      ({{ if $commitURL }}<a href="{{ $commitURL }}" rel="noopener noreferrer">{{ .short }}</a>{{ else }}{{ .short }}{{ end }})
+                    </span>
+                  </p>
+                </li>
+              {{ end }}
+            </ol>
+          </details>
         </section>
       {{ end }}
     {{ end }}

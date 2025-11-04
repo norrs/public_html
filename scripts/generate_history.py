@@ -12,7 +12,6 @@ ROOT = Path(__file__).resolve().parents[1]
 CONTENT_ROOT = ROOT / "content" / "posts"
 DATA_ROOT = ROOT / "data"
 POST_HISTORY_ROOT = DATA_ROOT / "post-history"
-REPO_HISTORY_FILE = DATA_ROOT / "repo-history.json"
 
 
 def run_git(args: Iterable[str]) -> str:
@@ -32,24 +31,18 @@ def parse_log_lines(lines: Iterable[str]) -> List[dict]:
         if not raw_line:
             continue
         parts: List[str] = raw_line.split("\x1f")
-        if len(parts) != 4:
+        if len(parts) != 3:
             continue
-        commit, date, author, subject = parts
+        commit, date, subject = parts
         entries.append(
             {
                 "hash": commit,
                 "short": commit[:7],
-                "author": author,
                 "date": date,
                 "subject": subject,
             }
         )
     return entries
-
-
-def collect_repo_history() -> List[dict]:
-    output = run_git(["log", "--date=iso-strict", "--pretty=format:%H%x1f%ad%x1f%an%x1f%s"])
-    return parse_log_lines(output.splitlines())
 
 
 def collect_post_history(markdown: Path) -> List[dict]:
@@ -58,7 +51,7 @@ def collect_post_history(markdown: Path) -> List[dict]:
         "log",
         "--follow",
         "--date=iso-strict",
-        "--pretty=format:%H%x1f%ad%x1f%an%x1f%s",
+        "--pretty=format:%H%x1f%ad%x1f%s",
         "--",
         str(rel_path),
     ])
@@ -84,8 +77,6 @@ def generate_post_histories() -> None:
 
 
 def main() -> None:
-    repo_history = collect_repo_history()
-    write_json(REPO_HISTORY_FILE, repo_history)
     generate_post_histories()
 
 

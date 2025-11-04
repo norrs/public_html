@@ -1,6 +1,10 @@
 {{ define "main" }}
-  <h2>{{ if .IsHome }}Latest Writing{{ else }}{{ .Title }}{{ end }}</h2>
-  {{ if .Content }}<div class="page-lead">{{ .Content }}</div>{{ end }}
+  <h2>{{ if .IsHome }}Latest Snippets{{ else }}{{ .Title }}{{ end }}</h2>
+  {{ if .IsHome }}
+    <div class="page-lead">Fresh notes, drafts, and CPC-inspired experiments.</div>
+  {{ else if .Content }}
+    <div class="page-lead">{{ .Content }}</div>
+  {{ end }}
   <ul class="post-list">
     {{ range .Paginator.Pages }}
       <li>

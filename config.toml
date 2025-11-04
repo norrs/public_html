@@ -1,6 +1,6 @@
 baseURL = "https://example.com/"
 languageCode = "en-us"
-title = "Simple Markdown Blog"
+title = "norrs - snippets of text"
 enableGitInfo = true
 [pagination]
   pagerSize = 10
@@ -13,4 +13,5 @@ enableGitInfo = true
     startLevel = 2
     endLevel = 3
 [params]
-  description = "An ultra-minimal blog compiled from Markdown."
+  description = "Attracted to computers since two."
+  repoURL = "https://github.com/norrs/public_html"

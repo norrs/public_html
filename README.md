@@ -24,7 +24,7 @@ This repository contains a Hugo-powered blog that converts Markdown into clean, 
 
 The default theme is inspired by the Amstrad CPC6128 palette but tuned for modern readability with generous white space and high-contrast typography.
 
-## Creating new posts
+## Creating new snippets
 
 Use Hugo’s archetype to scaffold a draft:
 
@@ -34,7 +34,7 @@ hugo new posts/my-new-post.md
 
 Update the front matter as desired. Remove `draft: true` when you are ready to publish. The `.Date` field controls the “Created” timestamp; `.Lastmod` is pulled from Git automatically.
 
-Each post shows a revision timeline sourced from Git at the bottom of the page. The history includes every commit that touched that Markdown file (following renames).
+Each snippet shows a revision timeline sourced from Git at the bottom of the page. The history includes every commit that touched that Markdown file (following renames).
 
 ## Deployment (GitHub Pages)
 
@@ -79,7 +79,3 @@ jobs:
 ```
 
 Place your custom domain in `static/CNAME` and configure your DNS records to point at GitHub Pages.
-
-## Repository history view
-
-Visit `/history/` in the generated site to browse commits. The data is created automatically by the same script that powers per-post timelines.
