@@ -1,0 +1,23 @@
+{{ $page := . }}
+{{ if eq $page.Section "posts" }}
+  {{ $historyRoot := index $page.Site.Data "post-history" }}
+  {{ if $historyRoot }}
+    {{ $section := index $historyRoot $page.Section }}
+    {{ if $section }}
+      {{ $entries := index $section $page.File.TranslationBaseName }}
+      {{ if $entries }}
+        <section class="post-history">
+          <h2>Revision history</h2>
+          <ol>
+            {{ range $entries }}
+              <li>
+                <p><time datetime="{{ .date }}">{{ (time .date).Format "Jan 2, 2006 15:04" }}</time> &mdash; {{ .subject }} <span class="commit-hash">({{ .short }})</span></p>
+                <p class="meta">{{ .author }}</p>
+              </li>
+            {{ end }}
+          </ol>
+        </section>
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}

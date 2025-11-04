@@ -1,0 +1,220 @@
+:root {
+  color-scheme: light;
+  --bg-base: #f8f4e6;
+  --bg-panel: #ffffff;
+  --text-body: #1a1a1a;
+  --text-muted: #4a4a4a;
+  --accent-primary: #0055a4; /* Amstrad blue */
+  --accent-secondary: #ffb000; /* warm amber reminiscent of CPC palette */
+  --accent-tertiary: #36c486; /* soft green */
+  font-family: "Atkinson Hyperlegible", "Inter", "Segoe UI", system-ui, sans-serif;
+  line-height: 1.65;
+  background-color: var(--bg-base);
+  color: var(--text-body);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-base);
+}
+
+a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover,
+a:focus {
+  color: var(--accent-secondary);
+}
+
+.site-header,
+.site-footer {
+  background: var(--bg-panel);
+  border-bottom: 4px solid var(--accent-secondary);
+  padding: 1.75rem 1rem;
+  box-shadow: 0 6px 0 rgba(0, 85, 164, 0.08);
+}
+
+.site-footer {
+  border-top: 4px solid var(--accent-tertiary);
+  border-bottom: none;
+  text-align: center;
+  font-size: 0.95rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  box-shadow: none;
+}
+
+.site-title {
+  margin: 0;
+  font-size: 2.1rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+}
+
+.site-title a {
+  color: inherit;
+}
+
+.site-tagline {
+  margin: 0.35rem 0 1.5rem;
+  color: var(--text-muted);
+  max-width: 38rem;
+}
+
+nav a {
+  margin-right: 1.25rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+}
+
+.content {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4.5rem;
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 2.5rem 0;
+}
+
+.post-list li {
+  margin-bottom: 2.5rem;
+  padding: 1.75rem;
+  border: 2px solid var(--accent-primary);
+  border-radius: 1rem;
+  background: var(--bg-panel);
+  box-shadow: 8px 8px 0 rgba(255, 176, 0, 0.2);
+}
+
+.post-header .meta,
+.meta {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.post-body {
+  margin-top: 2rem;
+}
+
+.post-body h2,
+.post-body h3,
+.post-body h4 {
+  color: var(--accent-primary);
+}
+
+.post-body pre,
+.post-body code {
+  font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+  background: rgba(0, 85, 164, 0.08);
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.4rem;
+}
+
+.post-history {
+  margin-top: 3rem;
+  padding: 2rem;
+  border: 2px dashed var(--accent-secondary);
+  border-radius: 1.25rem;
+  background: var(--bg-panel);
+  box-shadow: inset 0 0 0 4px rgba(255, 176, 0, 0.1);
+}
+
+.post-history h2 {
+  margin-top: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 1rem;
+  color: var(--accent-primary);
+}
+
+.post-history ol {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.post-history li {
+  padding: 1rem 1.25rem;
+  border-radius: 0.85rem;
+  background: rgba(54, 196, 134, 0.12);
+  border: 1px solid rgba(0, 85, 164, 0.15);
+}
+
+.post-history .commit-hash {
+  font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+  color: var(--accent-primary);
+}
+
+.git-history {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+  margin: 2.5rem 0;
+}
+
+.git-history li {
+  padding: 1.75rem;
+  border: 2px solid var(--accent-primary);
+  border-radius: 1rem;
+  background: var(--bg-panel);
+  box-shadow: 8px 8px 0 rgba(0, 85, 164, 0.12);
+}
+
+.git-history h2 {
+  margin: 0 0 0.75rem;
+  color: var(--accent-primary);
+}
+
+.page-header {
+  margin-bottom: 2.5rem;
+}
+
+.page-lead {
+  margin-top: 0.75rem;
+  color: var(--text-muted);
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3.5rem;
+}
+
+.empty-state {
+  padding: 1.5rem;
+  border-left: 6px solid var(--accent-primary);
+  background: rgba(0, 85, 164, 0.08);
+  color: var(--text-body);
+}
+
+@media (max-width: 680px) {
+  nav a {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+
+  .post-list li,
+  .git-history li {
+    box-shadow: 5px 5px 0 rgba(255, 176, 0, 0.2);
+  }
+
+  .post-history {
+    padding: 1.5rem;
+  }
+}

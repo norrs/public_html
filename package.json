@@ -1,0 +1,10 @@
+{
+  "name": "simple-markdown-blog",
+  "version": "0.2.0",
+  "private": true,
+  "scripts": {
+    "prepare-history": "python scripts/generate_history.py",
+    "dev": "npm run prepare-history && hugo server -D --disableFastRender --bind 0.0.0.0 --port 1313",
+    "build": "npm run prepare-history && hugo --minify"
+  }
+}

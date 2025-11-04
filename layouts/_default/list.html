@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <h2>{{ if .IsHome }}Latest Writing{{ else }}{{ .Title }}{{ end }}</h2>
+  {{ if .Content }}<div class="page-lead">{{ .Content }}</div>{{ end }}
+  <ul class="post-list">
+    {{ range .Paginator.Pages }}
+      <li>
+        <article>
+          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          <p class="meta">
+            <span>Created: <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></span>
+            {{ with .Lastmod }}
+              <span>Updated: <time datetime="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ .Format "Jan 2, 2006 15:04" }}</time></span>
+            {{ end }}
+          </p>
+          {{ with .Summary }}<p>{{ . }}</p>{{ end }}
+        </article>
+      </li>
+    {{ end }}
+  </ul>
+  {{ template "partials/pagination.html" . }}
+{{ end }}
