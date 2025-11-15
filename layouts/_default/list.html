@@ -16,7 +16,14 @@
               <span>Updated: <time datetime="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ .Format "Jan 2, 2006 15:04" }}</time></span>
             {{ end }}
           </p>
-          {{ with .Summary }}<p>{{ . }}</p>{{ end }}
+          {{ $page := . }}
+          {{ with .Summary }}
+            {{ $summaryText := (trim " " (replaceRE "\\s+" " " (. | plainify))) | truncate 320 "" }}
+            <p class="post-summary">
+              {{ $summaryText }}
+              <span class="more-cta">&hellip; <a class="read-more" href="{{ $page.RelPermalink }}">Read more</a></span>
+            </p>
+          {{ end }}
         </article>
       </li>
     {{ end }}

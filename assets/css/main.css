@@ -168,6 +168,29 @@ h3 {
     12px 12px 0 rgba(248, 72, 242, 0.25);
 }
 
+.post-summary {
+  margin-top: 1.5rem;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-body);
+}
+
+.post-summary .more-cta {
+  font-weight: 600;
+  white-space: nowrap;
+  margin-left: 0.35rem;
+}
+
+.post-summary .read-more {
+  color: var(--accent-primary);
+  text-decoration: none;
+}
+
+.post-summary .read-more:hover,
+.post-summary .read-more:focus-visible {
+  text-decoration: underline;
+}
+
 .post-header .meta,
 .meta {
   font-size: 1rem;
