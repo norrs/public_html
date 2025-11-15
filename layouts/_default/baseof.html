@@ -10,11 +10,14 @@
 </head>
 <body>
   <header class="site-header">
-    <h1 class="site-title"><a href="{{ "/" | relLangURL }}">{{ .Site.Title }}</a></h1>
-    <p class="site-tagline">{{ .Site.Params.description }}</p>
-    <nav aria-label="Primary">
-      <a href="{{ "/" | relLangURL }}">Snippets</a>
-    </nav>
+    <div class="site-header__intro">
+      <h1 class="site-title"><a href="{{ "/" | relLangURL }}">{{ .Site.Title }}</a></h1>
+      <p class="site-tagline">{{ .Site.Params.description }}</p>
+      <nav aria-label="Primary">
+        <a href="{{ "/" | relLangURL }}">Snippets</a>
+      </nav>
+    </div>
+    {{ partial "calendar-widget.html" . }}
   </header>
   <main class="content">
     {{ block "main" . }}{{ end }}

@@ -1,32 +1,49 @@
 {{ define "main" }}
+  {{ $today := now }}
+  {{ $cutoff := $today.AddDate 0 0 -59 }}
+  {{ $pages := .Pages }}
+  {{ if not $pages }}
+    {{ $pages = .RegularPages }}
+  {{ end }}
+  {{ if .IsHome }}
+    {{ $pages = where .Site.RegularPages "Section" "posts" }}
+  {{ end }}
+  {{ $pages = where $pages "Date" "ge" $cutoff }}
+  {{ $paginator := .Paginate $pages }}
   <h2>{{ if .IsHome }}Latest Snippets{{ else }}{{ .Title }}{{ end }}</h2>
   {{ if .IsHome }}
-    <div class="page-lead">Fresh notes, drafts, and CPC-inspired experiments.</div>
+    <div class="page-lead">Fresh notes from the past sixty days.</div>
   {{ else if .Content }}
     <div class="page-lead">{{ .Content }}</div>
   {{ end }}
   <ul class="post-list">
-    {{ range .Paginator.Pages }}
-      <li>
+    {{ range $paginator.Pages }}
+      <li class="post-card">
         <article>
-          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-          <p class="meta">
-            <span>Created: <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></span>
-            {{ with .Lastmod }}
-              <span>Updated: <time datetime="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ .Format "Jan 2, 2006 15:04" }}</time></span>
-            {{ end }}
-          </p>
+          <header class="post-card__header">
+            <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+            <p class="meta">
+              <span>
+                <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2" }}</time>
+              </span>
+              {{ with .Lastmod }}
+                <span>Updated <time datetime="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ .Format "Jan 2, 15:04" }}</time></span>
+              {{ end }}
+            </p>
+          </header>
           {{ $page := . }}
           {{ with .Summary }}
-            {{ $summaryText := (trim " " (replaceRE "\\s+" " " (. | plainify))) | truncate 320 "" }}
+            {{ $summaryText := (trim " " (replaceRE "\\s+" " " (. | plainify))) | truncate 130 "" }}
             <p class="post-summary">
               {{ $summaryText }}
               <span class="more-cta">&hellip; <a class="read-more" href="{{ $page.RelPermalink }}">Read more</a></span>
             </p>
+          {{ else }}
+            <p class="post-summary">Read more for full details.</p>
           {{ end }}
         </article>
       </li>
     {{ end }}
   </ul>
-  {{ template "partials/pagination.html" . }}
+  {{ template "partials/pagination.html" (dict "Paginator" $paginator) }}
 {{ end }}

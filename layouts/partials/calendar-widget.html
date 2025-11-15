@@ -1,0 +1,54 @@
+{{ $today := now }}
+{{ $cutoff := $today.AddDate 0 0 -59 }}
+{{ $posts := where .Site.RegularPages "Section" "posts" }}
+{{ $recentPosts := where $posts "Date" "ge" $cutoff }}
+{{ $scratch := newScratch }}
+{{ range $recentPosts }}
+  {{ $key := .Date.Format "2006-01-02" }}
+  {{ with $scratch.Get $key }}
+    {{ $scratch.Set $key (append . .) }}
+  {{ else }}
+    {{ $scratch.Set $key (slice .) }}
+  {{ end }}
+{{ end }}
+{{ $currentMonthStart := time (printf "%d-%02d-01" ($today.Year) ($today.Month)) }}
+{{ $monthLabel := $currentMonthStart.Format "January 2006" }}
+<div class="calendar-widget" aria-label="{{ printf "%s recent posts" $monthLabel }}">
+  <section class="calendar-month" aria-label="{{ $monthLabel }}">
+    <header>
+      <h2>{{ $monthLabel }}</h2>
+    </header>
+    <div class="calendar-grid" role="grid" aria-label="{{ $monthLabel }}">
+      {{ range $dayName := slice "Sun" "Mon" "Tue" "Wed" "Thu" "Fri" "Sat" }}
+        <div class="calendar-weekday" role="columnheader">{{ $dayName }}</div>
+      {{ end }}
+      {{ $weekday := int $currentMonthStart.Weekday }}
+      {{ if gt $weekday 0 }}
+        {{ range seq 1 $weekday }}
+          <div class="calendar-day calendar-day--empty" aria-hidden="true"></div>
+        {{ end }}
+      {{ end }}
+      {{ range seq 1 31 }}
+        {{ $offsetDays := int (sub . 1) }}
+        {{ $currentDay := $currentMonthStart.AddDate 0 0 $offsetDays }}
+        {{ if eq $currentDay.Month $currentMonthStart.Month }}
+          {{ $key := $currentDay.Format "2006-01-02" }}
+          {{ $entries := default (slice) ($scratch.Get $key) }}
+          {{ $entryCount := len $entries }}
+          {{ $hasEntries := gt $entryCount 0 }}
+          {{ $label := printf "%s – %d %s" ($currentDay.Format "Jan 2") $entryCount (cond (eq $entryCount 1) "entry" "entries") }}
+          <div class="calendar-day{{ if $hasEntries }} has-posts{{ end }}" role="gridcell" aria-label="{{ $label }}">
+            <div class="calendar-date">{{ $currentDay.Format "2" }}</div>
+            {{ if $hasEntries }}
+              <ul class="calendar-links">
+                {{ range $entries }}
+                  <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+                {{ end }}
+              </ul>
+            {{ end }}
+          </div>
+        {{ end }}
+      {{ end }}
+    </div>
+  </section>
+</div>
