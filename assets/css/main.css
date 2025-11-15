@@ -20,6 +20,12 @@
   color: var(--text-body);
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -28,6 +34,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 a {
@@ -196,6 +203,11 @@ h3 {
   gap: 0.75rem;
 }
 
+.post {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 .post-card h3 {
   margin: 0;
   font-size: 1.1rem;
@@ -239,6 +251,8 @@ h3 {
 .post-body {
   margin-top: 2.5rem;
   hyphens: auto;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .post-body h2,
@@ -260,18 +274,30 @@ blockquote {
   color: var(--text-body);
 }
 
-.post-body pre,
 .post-body code {
   font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
   background: rgba(0, 26, 82, 0.75);
   color: var(--accent-highlight);
   padding: 0.25rem 0.45rem;
   border-radius: 0.4rem;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .post-body pre {
+  font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+  background: rgba(0, 26, 82, 0.75);
+  color: var(--accent-highlight);
   padding: 1.1rem 1.35rem;
   overflow-x: auto;
+  max-width: 100%;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.post-body pre code {
+  background: transparent;
+  padding: 0;
 }
 
 .post-history {
